@@ -2,7 +2,7 @@
 # Backup AutoScript Xray configs, users, and services
 # Usage: backup.sh [output_dir]
 # If rclone remote "gdrive:" is configured, upload automatically and print share link.
-set -euo pipefail
+set -uo pipefail
 
 OUT_DIR=${1:-/root}
 timestamp=$(date +%F-%H%M%S)
@@ -14,6 +14,9 @@ add_if_exists() {
 }
 
 include=()
+mkdir -p "$OUT_DIR"
+
+echo "Menyiapkan daftar file untuk dibackup..."
 # Core configs
 add_if_exists "/etc/xray"
 add_if_exists "/etc/v2ray"
@@ -59,8 +62,9 @@ if [ "${#include[@]}" -eq 0 ]; then
   exit 1
 fi
 
+echo "Membuat arsip $outfile ..."
 tar -czf "$outfile" "${include[@]}"
-echo "Backup selesai: $outfile"
+echo "Backup selesai dibuat di: $outfile"
 
 # Upload to Google Drive via rclone if configured
 if command -v rclone >/dev/null 2>&1; then
@@ -68,10 +72,14 @@ if command -v rclone >/dev/null 2>&1; then
   if rclone listremotes 2>/dev/null | grep -q "^${remote_name}$"; then
     target_path=$REMOTE
     rclone mkdir "$target_path" >/dev/null 2>&1 || true
-    rclone copy "$outfile" "$target_path" --quiet
+    if rclone copy "$outfile" "$target_path" --quiet; then
+      echo "Upload selesai ke $target_path"
+    else
+      echo "Upload ke $target_path gagal; arsip tetap ada di lokal: $outfile"
+      exit 0
+    fi
     fname=$(basename "$outfile")
     link=$(rclone link "$target_path/$fname" 2>/dev/null || true)
-    echo "Uploaded to $target_path/$fname"
     [ -n "$link" ] && echo "Share link: $link"
   else
     echo "rclone terpasang tapi remote $remote_name tidak ditemukan. Simpan file lokal di $outfile"
@@ -79,3 +87,5 @@ if command -v rclone >/dev/null 2>&1; then
 else
   echo "rclone tidak terpasang; file backup tersedia lokal: $outfile"
 fi
+
+exit 0
