@@ -21,6 +21,12 @@ echo -e   "Press x or [ Ctrl+C ] • To-Exit"
 echo -e   ""
 echo -e "\\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\033[0m"
 echo -e ""
+script_dir="$(cd -- "$(dirname -- "$0")" && pwd)"
+backup_cmd="$script_dir/backup.sh"
+restore_cmd="$script_dir/restore.sh"
+[ -x /usr/bin/backup.sh ] && backup_cmd="/usr/bin/backup.sh"
+[ -x /usr/bin/restore.sh ] && restore_cmd="/usr/bin/restore.sh"
+
 read -p " Select menu : " opt
 echo -e ""
 case $opt in
@@ -32,8 +38,8 @@ case $opt in
 6) clear ; m-tcp ; exit ;;
 7) clear ; m-dns ; exit ;;
 8) clear ; m-update ; exit ;;
-9) clear ; backup.sh ; exit ;;
-10) clear ; restore.sh ; exit ;;
+9) clear ; bash "$backup_cmd" ; exit ;;
+10) clear ; bash "$restore_cmd" ; exit ;;
 0) clear ; menu ; exit ;;
 x) exit ;;
 *) echo -e "" ; echo "Anda salah tekan" ; sleep 1 ; m-system ;;
