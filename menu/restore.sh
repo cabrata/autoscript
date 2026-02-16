@@ -20,19 +20,30 @@ elif [[ "$backup_file" =~ ^https?:// ]]; then
       exit 1
     fi
   else
-    if command -v pip3 >/dev/null 2>&1; then
-      echo "Menginstall gdown..."
-      if ! pip3 install --no-cache-dir gdown >/dev/null 2>&1; then
-        echo "Install gdown gagal. Unduh manual lalu jalankan ulang."
+    if command -v rclone >/dev/null 2>&1; then
+      echo "gdown tidak ada, mencoba rclone copyurl..."
+      if ! rclone copyurl "$backup_file" "$tmp_download" >/dev/null 2>&1; then
+        echo "rclone copyurl gagal."
+        # fallback to pip3 install gdown
+      else
+        :
+      fi
+    fi
+    if [ ! -s "$tmp_download" ]; then
+      if command -v pip3 >/dev/null 2>&1; then
+        echo "Menginstall gdown..."
+        if ! pip3 install --no-cache-dir gdown >/dev/null 2>&1; then
+          echo "Install gdown gagal. Unduh manual lalu jalankan ulang. (Pastikan python3-pip terpasang: apt install python3-pip)"
+          exit 1
+        fi
+        if ! gdown --fuzzy "$backup_file" -O "$tmp_download"; then
+          echo "gdown gagal mengunduh file."
+          exit 1
+        fi
+      else
+        echo "gdown & pip3 tidak tersedia, dan rclone tidak berhasil. Unduh manual lalu jalankan restore lagi."
         exit 1
       fi
-      if ! gdown --fuzzy "$backup_file" -O "$tmp_download"; then
-        echo "gdown gagal mengunduh file."
-        exit 1
-      fi
-    else
-      echo "gdown tidak tersedia dan pip3 tidak ditemukan. Unduh manual lalu jalankan restore lagi."
-      exit 1
     fi
   fi
   backup_file="$tmp_download"
