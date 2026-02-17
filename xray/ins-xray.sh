@@ -410,6 +410,30 @@ sed -i '$ iproxy_set_header Connection "upgrade";' /etc/nginx/conf.d/xray.conf
 sed -i '$ iproxy_set_header Host \$http_host;' /etc/nginx/conf.d/xray.conf
 sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 
+sed -i '$ ilocation = /ws-http' /etc/nginx/conf.d/xray.conf
+sed -i '$ i{' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_redirect off;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_pass http://127.0.0.1:2092;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_http_version 1.1;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header X-Real-IP \$remote_addr;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Upgrade \$http_upgrade;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Connection "upgrade";' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Host \$http_host;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+
+sed -i '$ ilocation = /ws-https' /etc/nginx/conf.d/xray.conf
+sed -i '$ i{' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_redirect off;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_pass http://127.0.0.1:2091;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_http_version 1.1;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header X-Real-IP \$remote_addr;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Upgrade \$http_upgrade;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Connection "upgrade";' /etc/nginx/conf.d/xray.conf
+sed -i '$ iproxy_set_header Host \$http_host;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+
 sed -i '$ ilocation = /trojan-ws' /etc/nginx/conf.d/xray.conf
 sed -i '$ i{' /etc/nginx/conf.d/xray.conf
 sed -i '$ iproxy_redirect off;' /etc/nginx/conf.d/xray.conf
@@ -495,31 +519,31 @@ systemctl restart runn
 
 cd /usr/bin/
 # vmess
-wget -O add-ws "https://autoscript.caliphdev.com/xray/add-ws.sh" && chmod +x add-ws
-wget -O trialvmess "https://autoscript.caliphdev.com/xray/trialvmess.sh" && chmod +x trialvmess
-wget -O renew-ws "https://autoscript.caliphdev.com/xray/renew-ws.sh" && chmod +x renew-ws
-wget -O del-ws "https://autoscript.caliphdev.com/xray/del-ws.sh" && chmod +x del-ws
-wget -O cek-ws "https://autoscript.caliphdev.com/xray/cek-ws.sh" && chmod +x cek-ws
+wget -O add-ws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/add-ws.sh" && chmod +x add-ws
+wget -O trialvmess "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/trialvmess.sh" && chmod +x trialvmess
+wget -O renew-ws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/renew-ws.sh" && chmod +x renew-ws
+wget -O del-ws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/del-ws.sh" && chmod +x del-ws
+wget -O cek-ws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/cek-ws.sh" && chmod +x cek-ws
 
 # vless
-wget -O add-vless "https://autoscript.caliphdev.com/xray/add-vless.sh" && chmod +x add-vless
-wget -O trialvless "https://autoscript.caliphdev.com/xray/trialvless.sh" && chmod +x trialvless
-wget -O renew-vless "https://autoscript.caliphdev.com/xray/renew-vless.sh" && chmod +x renew-vless
-wget -O del-vless "https://autoscript.caliphdev.com/xray/del-vless.sh" && chmod +x del-vless
-wget -O cek-vless "https://autoscript.caliphdev.com/xray/cek-vless.sh" && chmod +x cek-vless
+wget -O add-vless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/add-vless.sh" && chmod +x add-vless
+wget -O trialvless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/trialvless.sh" && chmod +x trialvless
+wget -O renew-vless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/renew-vless.sh" && chmod +x renew-vless
+wget -O del-vless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/del-vless.sh" && chmod +x del-vless
+wget -O cek-vless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/cek-vless.sh" && chmod +x cek-vless
 
 # trojan
-wget -O add-tr "https://autoscript.caliphdev.com/xray/add-tr.sh" && chmod +x add-tr
-wget -O trialtrojan "https://autoscript.caliphdev.com/xray/trialtrojan.sh" && chmod +x trialtrojan
-wget -O del-tr "https://autoscript.caliphdev.com/xray/del-tr.sh" && chmod +x del-tr
-wget -O renew-tr "https://autoscript.caliphdev.com/xray/renew-tr.sh" && chmod +x renew-tr
-wget -O cek-tr "https://autoscript.caliphdev.com/xray/cek-tr.sh" && chmod +x cek-tr
+wget -O add-tr "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/add-tr.sh" && chmod +x add-tr
+wget -O trialtrojan "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/trialtrojan.sh" && chmod +x trialtrojan
+wget -O del-tr "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/del-tr.sh" && chmod +x del-tr
+wget -O renew-tr "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/renew-tr.sh" && chmod +x renew-tr
+wget -O cek-tr "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/cek-tr.sh" && chmod +x cek-tr
 
 # shadowsocks
-wget -O add-ssws "https://autoscript.caliphdev.com/xray/add-ssws.sh" && chmod +x add-ssws
-wget -O trialssws "https://autoscript.caliphdev.com/xray/trialssws.sh" && chmod +x trialssws
-wget -O del-ssws "https://autoscript.caliphdev.com/xray/del-ssws.sh" && chmod +x del-ssws
-wget -O renew-ssws "https://autoscript.caliphdev.com/xray/renew-ssws.sh" && chmod +x renew-ssws
+wget -O add-ssws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/add-ssws.sh" && chmod +x add-ssws
+wget -O trialssws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/trialssws.sh" && chmod +x trialssws
+wget -O del-ssws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/del-ssws.sh" && chmod +x del-ssws
+wget -O renew-ssws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/renew-ssws.sh" && chmod +x renew-ssws
 
 
 sleep 0.5

@@ -22,7 +22,7 @@ commonname=none
 email=none
 
 # simple password minimal
-curl -sS https://autoscript.caliphdev.com/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
+curl -sS https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
 chmod +x /etc/pam.d/common-password
 
 # go to root
@@ -160,9 +160,9 @@ apt -y install nginx
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://autoscript.caliphdev.com/ssh/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/nginx.conf"
 rm /etc/nginx/conf.d/vps.conf
-wget -O /etc/nginx/conf.d/vps.conf "https://autoscript.caliphdev.com/ssh/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/vps.conf"
 /etc/init.d/nginx restart
 
 mkdir /etc/systemd/system/nginx.service.d
@@ -173,13 +173,13 @@ service nginx restart
 cd
 mkdir /home/vps
 mkdir /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://autoscript.caliphdev.com/ssh/index"
-wget -O /home/vps/public_html/.htaccess "https://autoscript.caliphdev.com/ssh/.htaccess"
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/index"
+wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/.htaccess"
 mkdir /home/vps/public_html/ss-ws
 mkdir /home/vps/public_html/clash-ws
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://autoscript.caliphdev.com/ssh/newudpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
@@ -258,7 +258,7 @@ apt -y install fail2ban
 
 
 # // banner /etc/issue.net
-wget -O /etc/issue.net "https://autoscript.caliphdev.com/banner/banner.conf"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/banner/banner.conf"
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 
 # blokir torrent
@@ -281,50 +281,50 @@ netfilter-persistent reload
 # download script
 cd /usr/bin
 # menu
-wget -O menu "https://autoscript.caliphdev.com/menu/menu.sh"
-wget -O m-vmess "https://autoscript.caliphdev.com/menu/m-vmess.sh"
-wget -O m-vless "https://autoscript.caliphdev.com/menu/m-vless.sh"
-wget -O running "https://autoscript.caliphdev.com/menu/running.sh"
-wget -O clearcache "https://autoscript.caliphdev.com/menu/clearcache.sh"
-wget -O m-ssws "https://autoscript.caliphdev.com/menu/m-ssws.sh"
-wget -O m-trojan "https://autoscript.caliphdev.com/menu/m-trojan.sh"
-wget -O xray-renew "https://autoscript.caliphdev.com/xray/xray-renew.sh"
+wget -O menu "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/menu.sh"
+wget -O m-vmess "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-vmess.sh"
+wget -O m-vless "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-vless.sh"
+wget -O running "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/running.sh"
+wget -O clearcache "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/clearcache.sh"
+wget -O m-ssws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-ssws.sh"
+wget -O m-trojan "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-trojan.sh"
+wget -O xray-renew "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/xray-renew.sh"
 
 
 # menu ssh ovpn
-wget -O m-sshovpn "https://autoscript.caliphdev.com/menu/m-sshovpn.sh"
-wget -O usernew "https://autoscript.caliphdev.com/ssh/usernew.sh"
-wget -O trial "https://autoscript.caliphdev.com/ssh/trial.sh"
-wget -O renew "https://autoscript.caliphdev.com/ssh/renew.sh"
-wget -O hapus "https://autoscript.caliphdev.com/ssh/hapus.sh"
-wget -O cek "https://autoscript.caliphdev.com/ssh/cek.sh"
-wget -O member "https://autoscript.caliphdev.com/ssh/member.sh"
-wget -O delete "https://autoscript.caliphdev.com/ssh/delete.sh"
-wget -O autokill "https://autoscript.caliphdev.com/ssh/autokill.sh"
-wget -O ceklim "https://autoscript.caliphdev.com/ssh/ceklim.sh"
-wget -O tendang "https://autoscript.caliphdev.com/ssh/tendang.sh"
-wget -O sshws "https://autoscript.caliphdev.com/ssh/sshws.sh"
-wget -O user-lock "https://autoscript.caliphdev.com/ssh/user-lock.sh"
-wget -O user-unlock "https://autoscript.caliphdev.com/ssh/user-unlock.sh"
+wget -O m-sshovpn "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-sshovpn.sh"
+wget -O usernew "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/usernew.sh"
+wget -O trial "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/trial.sh"
+wget -O renew "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/renew.sh"
+wget -O hapus "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/hapus.sh"
+wget -O cek "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/cek.sh"
+wget -O member "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/member.sh"
+wget -O delete "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/delete.sh"
+wget -O autokill "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/autokill.sh"
+wget -O ceklim "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/ceklim.sh"
+wget -O tendang "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/tendang.sh"
+wget -O sshws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/sshws.sh"
+wget -O user-lock "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/user-lock.sh"
+wget -O user-unlock "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/user-unlock.sh"
 
 # menu system
-wget -O m-system "https://autoscript.caliphdev.com/menu/m-system.sh"
-wget -O m-domain "https://autoscript.caliphdev.com/menu/m-domain.sh"
-wget -O add-host "https://autoscript.caliphdev.com/ssh/add-host.sh"
-wget -O certv2ray "https://autoscript.caliphdev.com/xray/certv2ray.sh"
-wget -O speedtest "https://autoscript.caliphdev.com/ssh/speedtest_cli.py"
-wget -O auto-reboot "https://autoscript.caliphdev.com/menu/auto-reboot.sh"
-wget -O restart "https://autoscript.caliphdev.com/menu/restart.sh"
-wget -O bw "https://autoscript.caliphdev.com/menu/bw.sh"
-wget -O m-tcp "https://autoscript.caliphdev.com/menu/tcp.sh"
-wget -O xp "https://autoscript.caliphdev.com/ssh/xp.sh"
-wget -O sshws "https://autoscript.caliphdev.com/ssh/sshws.sh"
-wget -O m-dns "https://autoscript.caliphdev.com/menu/m-dns.sh"
+wget -O m-system "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-system.sh"
+wget -O m-domain "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-domain.sh"
+wget -O add-host "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/add-host.sh"
+wget -O certv2ray "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/certv2ray.sh"
+wget -O speedtest "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/speedtest_cli.py"
+wget -O auto-reboot "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/auto-reboot.sh"
+wget -O restart "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/restart.sh"
+wget -O bw "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/bw.sh"
+wget -O m-tcp "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/tcp.sh"
+wget -O xp "hhttps://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/xp.sh"
+wget -O sshws "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/sshws.sh"
+wget -O m-dns "hhttps://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-dns.sh"
 
 # Menu IPsec
-wget -O m-l2tp "https://autoscript.caliphdev.com/menu/m-l2tp.sh"
-wget -O m-sstp "https://autoscript.caliphdev.com/menu/m-sstp.sh"
-wget -O m-pptp "https://autoscript.caliphdev.com/menu/m-pptp.sh"
+wget -O m-l2tp "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-l2tp.sh"
+wget -O m-sstp "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-sstp.sh"
+wget -O m-pptp "https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-pptp.sh"
 
 chmod +x menu
 chmod +x m-vmess

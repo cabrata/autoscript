@@ -7,7 +7,7 @@ echo ""
 echo "Update Script..."
 
 # Define base URL
-BASE_URL="https://autoscript.caliphdev.com"
+BASE_URL="https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master"
 
 # Function to download and install a file
 update_file() {

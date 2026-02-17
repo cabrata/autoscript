@@ -15,8 +15,8 @@ rm -rf /usr/bin/clearcache
 rm -rf /usr/bin/menu
 echo "\e[1;32m Update Menu.. \e[0m"
 sleep 1
-wget -q -O /usr/bin/clearcache https://autoscript.caliphdev.com/menu/clearcache.sh
-wget -q -O /usr/bin/menu https://autoscript.caliphdev.com/menu/menu.sh
+wget -q -O /usr/bin/clearcache https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/clearcache.sh
+wget -q -O /usr/bin/menu https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/menu.sh
 sleep 1
 chmod +x /usr/bin/clearcache
 chmod +x /usr/bin/menu

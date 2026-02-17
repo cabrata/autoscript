@@ -12,7 +12,7 @@ CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 
 # Link Hosting Kalian
-akbarvpn="autoscript.caliphdev.com/sstp"
+akbarvpn="https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/sstp"
 
 MYIP=$(wget -qO- api4.ipify.org);
 MYIP2="s/xxxxxxxxx/$MYIP/g";

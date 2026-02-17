@@ -122,7 +122,7 @@ echo -e "$BGreen 2. Choose Your Own Domain / Gunakan Domain Sendiri $NC"
 echo -e "$BYellow----------------------------------------------------------$NC"
 read -rp " input 1 or 2 / pilih 1 atau 2 : " dns
 if test $dns -eq 1; then
-curl -sL https://autoscript.caliphdev.com/ssh/cf.sh | bash
+curl -sL https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/cf.sh | bash
 elif test $dns -eq 2; then
 read -rp "Enter Your Domain / masukan domain : " dom
 echo "IP=$dom" > /var/lib/ipvps.conf
@@ -155,31 +155,45 @@ echo -e "$BGreen      Install SSH Websocket           $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://autoscript.caliphdev.com/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #Instal Update Script
 echo -e "\e[33m-----------------------------------\033[0m"
 echo -e "$BGreen      Install Update Script           $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget -O /usr/bin/m-update https://autoscript.caliphdev.com/update/update.sh && chmod +x /usr/bin/m-update
+wget -O /usr/bin/m-update https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/update/update.sh && chmod +x /usr/bin/m-update
 #Instal Xray
 echo -e "\e[33m-----------------------------------\033[0m"
 echo -e "$BGreen          Install XRAY              $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://autoscript.caliphdev.com/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-wget https://autoscript.caliphdev.com/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 #Instal IPSec
 echo -e "\e[33m-----------------------------------\033[0m"
 echo -e "$BGreen          Install IPSec              $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://autoscript.caliphdev.com/ipsec/ipsec.sh && chmod +x ipsec.sh && ./ipsec.sh
-wget https://autoscript.caliphdev.com/sstp/sstp.sh && chmod +x sstp.sh && ./sstp.sh
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/ipsec/ipsec.sh && chmod +x ipsec.sh && ./ipsec.sh
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/sstp/sstp.sh && chmod +x sstp.sh && ./sstp.sh
 clear
+#Instal ws
+echo -e "\e[33m-----------------------------------\033[0m"
+echo -e "$BGreen          Install websocket              $NC"
+echo -e "\e[33m-----------------------------------\033[0m"
+sleep 0.5
+clear
+wget https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/websocket/websocket.sh && chmod +x websocket.sh && ./websocket.sh
+clear
+# Install backup/restore tools and updated system menu
+wget -O /usr/bin/backup.sh https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/backup.sh
+wget -O /usr/bin/restore.sh https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/restore.sh
+wget -O /usr/bin/m-system https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/m-system.sh
+apt install rclone python3-pip -y >/dev/null 2>&1
+chmod +x /usr/bin/backup.sh /usr/bin/restore.sh /usr/bin/m-system
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
@@ -215,7 +229,7 @@ if [ ! -f "/etc/log-create-shadowsocks.log" ]; then
 echo "Log Shadowsocks Account " > /etc/log-create-shadowsocks.log
 fi
 
-serverV=$( curl -sS https://autoscript.caliphdev.com/menu/versi  )
+serverV=$( curl -sS https://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/menu/versi  )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
@@ -276,4 +290,3 @@ for i in {10..1}; do echo -ne "\rAuto reboot in $i Seconds "; sleep 1; done
 echo -e "Rebooting...";
 rm -rf setup.sh
 reboot
-

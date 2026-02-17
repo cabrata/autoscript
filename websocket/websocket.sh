@@ -29,7 +29,7 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 Restart=on-failure
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-https
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-https
 
 [Install]
 WantedBy=multi-user.target
@@ -39,7 +39,7 @@ EOF
 cat <<EOF> /etc/systemd/system/ws-http.service
 [Unit]
 Description=Python Proxy
-Documentation=https://autoscript.caliphdev.com
+Documentation=https://github.com/givpn/
 After=network.target nss-lookup.target
 
 [Service]
@@ -48,7 +48,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-http
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-http
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
@@ -67,7 +67,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2097
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-ovpn 2097
 Restart=on-failure
 
 [Install]
@@ -75,10 +75,13 @@ WantedBy=multi-user.target
 EOF
 
 # // PYTHON WEBSOCKET TLS && NONE
-wget -q -O /usr/local/bin/ws-https https://raw.githubusercontent.com/${GitUser}/AutoScriptXray/master/websocket/ws-https; chmod +x /usr/local/bin/ws-https
+wget -q -O /usr/local/bin/ws-https ttps://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/websocket/ws-https; chmod +x /usr/local/bin/ws-https
+
+# // PYTHON WEBSOCKET DROPBEAR
+wget -q -O /usr/local/bin/ws-http ttps://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/websocket/ws-http; chmod +x /usr/local/bin/ws-http
 
 # // PYTHON WEBSOCKET OVPN
-wget -q -O /usr/local/bin/ws-ovpn https://raw.githubusercontent.com/${GitUser}/AutoScriptXray/master/websocket/ws-ovpn; chmod +x /usr/local/bin/ws-ovpn
+ttps://raw.githubusercontent.com/ngacaprak0809-commits/skytunel/refs/heads/master/websocket/ws-ovpn; chmod +x /usr/local/bin/ws-ovpn
 
 # // RESTART && ENABLE SSHVPN WEBSOCKET TLS 
 systemctl daemon-reload
