@@ -1,1 +1,0 @@
-stempel saja
